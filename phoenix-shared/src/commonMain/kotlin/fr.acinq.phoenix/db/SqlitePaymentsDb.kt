@@ -16,11 +16,11 @@
 
 package fr.acinq.phoenix.db
 
-import com.squareup.sqldelight.EnumColumnAdapter
-import com.squareup.sqldelight.db.SqlDriver
-import com.squareup.sqldelight.runtime.coroutines.asFlow
-import com.squareup.sqldelight.runtime.coroutines.mapToList
-import com.squareup.sqldelight.runtime.coroutines.mapToOne
+import app.cash.sqldelight.EnumColumnAdapter
+import app.cash.sqldelight.db.SqlDriver
+import app.cash.sqldelight.coroutines.asFlow
+import app.cash.sqldelight.coroutines.mapToList
+import app.cash.sqldelight.coroutines.mapToOne
 import fr.acinq.bitcoin.ByteVector32
 import fr.acinq.bitcoin.Crypto
 import fr.acinq.lightning.channel.ChannelException
@@ -28,7 +28,6 @@ import fr.acinq.lightning.db.*
 import fr.acinq.lightning.payment.FinalFailure
 import fr.acinq.lightning.utils.Either
 import fr.acinq.lightning.utils.UUID
-import fr.acinq.lightning.utils.ensureNeverFrozen
 import fr.acinq.lightning.utils.toByteVector32
 import fr.acinq.lightning.wire.FailureMessage
 import fr.acinq.phoenix.data.WalletPaymentId
@@ -47,10 +46,6 @@ class SqlitePaymentsDb(
     driver: SqlDriver,
     private val currencyManager: CurrencyManager? = null
 ) : PaymentsDb {
-
-    init {
-        ensureNeverFrozen() // Crashes when attempting to freeze CurrencyManager sub-graph
-    }
 
     /**
      * Within `SqlitePaymentsDb`, we are using background threads.
@@ -472,7 +467,7 @@ class SqlitePaymentsDb(
         val aggrQueries = _doNotFreezeMe.aggrQueries
 
         return withContext(Dispatchers.Default) {
-            aggrQueries.listAllPaymentsCount(::allPaymentsCountMapper).asFlow().mapToOne()
+            aggrQueries.listAllPaymentsCount(::allPaymentsCountMapper).asFlow().mapToOne(Dispatchers.Default)
         }
     }
 
@@ -502,7 +497,7 @@ class SqlitePaymentsDb(
                 limit = count.toLong(),
                 offset = skip.toLong(),
                 mapper = ::allPaymentsOrderMapper
-            ).asFlow().mapToList()
+            ).asFlow().mapToList(Dispatchers.Default)
         }
     }
 
@@ -536,7 +531,7 @@ class SqlitePaymentsDb(
                 limit = count.toLong(),
                 offset = skip.toLong(),
                 mapper = ::allPaymentsOrderMapper
-            ).asFlow().mapToList()
+            ).asFlow().mapToList(Dispatchers.Default)
         }
     }
 
@@ -551,7 +546,7 @@ class SqlitePaymentsDb(
                 limit = count.toLong(),
                 offset = skip.toLong(),
                 mapper = ::allPaymentsOrderMapper
-            ).asFlow().mapToList()
+            ).asFlow().mapToList(Dispatchers.Default)
         }
     }
 

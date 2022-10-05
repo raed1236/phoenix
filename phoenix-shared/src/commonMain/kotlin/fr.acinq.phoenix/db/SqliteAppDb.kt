@@ -1,9 +1,9 @@
 package fr.acinq.phoenix.db
 
-import com.squareup.sqldelight.EnumColumnAdapter
-import com.squareup.sqldelight.db.SqlDriver
-import com.squareup.sqldelight.runtime.coroutines.asFlow
-import com.squareup.sqldelight.runtime.coroutines.mapToList
+import app.cash.sqldelight.EnumColumnAdapter
+import app.cash.sqldelight.db.SqlDriver
+import app.cash.sqldelight.coroutines.asFlow
+import app.cash.sqldelight.coroutines.mapToList
 import fr.acinq.lightning.utils.Either
 import fr.acinq.lightning.utils.currentTimestampMillis
 import fr.acinq.phoenix.data.WalletContext
@@ -83,7 +83,7 @@ class SqliteAppDb(driver: SqlDriver) {
         //
         return priceQueries.list(mapper = { fiat, price, type, source, updated_at ->
             ExchangeRate.Row(fiat, price, type, source, updated_at)
-        }).asFlow().mapToList().map {
+        }).asFlow().mapToList(Dispatchers.Default).map {
             it.mapNotNull { row ->
                 FiatCurrency.valueOfOrNull(row.fiat)?.let { fiatCurrency ->
                     when (row.type) {
@@ -103,6 +103,7 @@ class SqliteAppDb(driver: SqlDriver) {
                                 timestampMillis = row.updated_at
                             )
                         }
+                        else -> null
                     }
                 }
             }

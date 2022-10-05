@@ -71,18 +71,18 @@ fun SeedView() {
                         state = SeedViewState.ReadingSeed
                         scope.launch {
                             val keyState = SeedManager.getSeedState(context)
-                            when {
+                            state = when {
                                 keyState is KeyState.Present && keyState.encryptedSeed is EncryptedSeed.V2.NoAuth -> {
                                     val words = EncryptedSeed.toMnemonics(keyState.encryptedSeed.decrypt())
                                     delay(300)
-                                    state = SeedViewState.ShowSeed(words)
+                                    SeedViewState.ShowSeed(words)
                                 }
                                 keyState is KeyState.Error.Unreadable -> {
-                                    state = SeedViewState.Error(context.getString(R.string.displayseed_error_details, keyState.message ?: "n/a"))
+                                    SeedViewState.Error(context.getString(R.string.displayseed_error_details, keyState.message ?: "n/a"))
                                 }
                                 else -> {
                                     log.info { "unable to read seed in state=$keyState" }
-                                    // TODO: handle errors
+                                    SeedViewState.Error("unhandled keyState=$keyState")
                                 }
                             }
                         }
@@ -94,6 +94,7 @@ fun SeedView() {
                 is SeedViewState.ShowSeed -> {
                     SeedDialog(onDismiss = { state = SeedViewState.Init }, words = s.words)
                 }
+                is SeedViewState.Error -> TextWithIcon(text = stringResource(id = R.string.displayseed_error_details, s.message), icon = R.drawable.ic_alert_triangle, padding = PaddingValues(16.dp), space = 16.dp)
             }
         }
     }

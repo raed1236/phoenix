@@ -1,7 +1,7 @@
 package fr.acinq.phoenix.db
 
-import com.squareup.sqldelight.runtime.coroutines.asFlow
-import com.squareup.sqldelight.runtime.coroutines.mapToOne
+import app.cash.sqldelight.runtime.coroutines.asFlow
+import app.cash.sqldelight.runtime.coroutines.mapToOne
 import fr.acinq.bitcoin.ByteVector32
 import fr.acinq.lightning.db.IncomingPayment
 import fr.acinq.lightning.db.OutgoingPayment

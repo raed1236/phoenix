@@ -7,11 +7,11 @@ plugins {
 val chain: String by project
 
 android {
-    compileSdk = 32
+    compileSdk = 33
     defaultConfig {
         applicationId = "fr.acinq.phoenix.android"
         minSdk = 24
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -53,7 +53,6 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerVersion = Versions.kotlin
         kotlinCompilerExtensionVersion = Versions.Android.composeCompiler
     }
 
@@ -74,11 +73,9 @@ dependencies {
     implementation(project(":phoenix-shared"))
     api(project(":phoenix-legacy"))
 
-    implementation("com.google.android.material:material:1.4.0")
+    implementation("com.google.android.material:material:1.6.1")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core") {
-        version { strictly(Versions.coroutines) }
-    }
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
 
     // -- AndroidX
     implementation("androidx.core:core-ktx:${Versions.Android.ktx}")
@@ -123,9 +120,9 @@ dependencies {
     implementation("com.google.guava:guava:31.0.1-android")
 
     testImplementation("junit:junit:${Versions.junit}")
-    testImplementation("com.squareup.sqldelight:sqlite-driver:${Versions.sqlDelight}")
+    testImplementation("app.cash.sqldelight:sqlite-driver:${Versions.sqlDelight}")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:${Versions.Android.espresso}")
 
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.2")
 }

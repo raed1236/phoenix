@@ -60,9 +60,6 @@ fun LegacySwitcherView(
     ) {
         Text(text = stringResource(id = R.string.legacyswitch_title))
         when (legacyAppStatus) {
-            null -> {
-                // do nothing
-            }
             LegacyAppStatus.Required.Expected -> {
                 LaunchedEffect(key1 = true) {
                     scope.launch {
@@ -97,6 +94,7 @@ fun LegacySwitcherView(
             }
             LegacyAppStatus.NotRequired -> onLegacyFinished()
             LegacyAppStatus.Unknown -> onLegacyFinished()
+            else -> Unit // do nothing
         }
     }
 }

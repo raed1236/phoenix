@@ -8,7 +8,7 @@ buildscript {
         classpath("com.android.tools.build:gradle:7.3.0")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
         classpath("org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}")
-        classpath("com.squareup.sqldelight:gradle-plugin:${Versions.sqlDelight}")
+        classpath("app.cash.sqldelight:gradle-plugin:${Versions.sqlDelight}")
 
         // Plugins for the legacy android app
         // Argument classes generation plugin for the androidx navigation component

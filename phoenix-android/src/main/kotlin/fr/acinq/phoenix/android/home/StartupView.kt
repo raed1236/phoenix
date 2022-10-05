@@ -172,6 +172,7 @@ private fun AttemptStart(
                 }
             }
         }
+        null -> Unit
     }
 }
 

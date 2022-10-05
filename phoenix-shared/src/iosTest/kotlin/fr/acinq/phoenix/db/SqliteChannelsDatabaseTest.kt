@@ -16,8 +16,8 @@
 
 package fr.acinq.phoenix.db
 
-import com.squareup.sqldelight.db.SqlDriver
-import com.squareup.sqldelight.drivers.native.NativeSqliteDriver
+import app.cash.sqldelight.db.SqlDriver
+import app.cash.sqldelight.drivers.native.NativeSqliteDriver
 import fr.acinq.lightning.Lightning
 
 actual fun testChannelsDriver(): SqlDriver {

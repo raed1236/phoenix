@@ -114,6 +114,7 @@ class AppScanController(
                             )
                         }
                     }
+                    else -> Unit
                 }
             }
         }

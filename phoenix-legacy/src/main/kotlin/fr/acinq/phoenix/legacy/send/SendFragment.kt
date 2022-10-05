@@ -215,6 +215,7 @@ class SendFragment : BaseFragment() {
         when (val state = model.state.value) {
           is SendState.Onchain.Ready -> sendSwapOut(state)
           is SendState.Lightning.Ready -> sendPaymentFinal(amount.get(), state.pr)
+          else -> Unit
         }
       }
     }
@@ -349,6 +350,7 @@ class SendFragment : BaseFragment() {
               throw AmountError.AboveRequestedAmount
             }
           }
+          else -> Unit
         }
       } else {
         throw RuntimeException("amount is undefined")

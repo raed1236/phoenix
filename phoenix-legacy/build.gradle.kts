@@ -7,7 +7,7 @@ plugins {
   id("kotlin-android-extensions")
   id("androidx.navigation.safeargs.kotlin")
   id("com.google.gms.google-services")
-  id("com.squareup.sqldelight")
+  id("app.cash.sqldelight")
   id("kotlinx-serialization")
 }
 
@@ -109,7 +109,7 @@ dependencies {
   implementation("androidx.datastore:datastore-preferences:1.0.0")
 
   // SQLDelight
-  implementation("com.squareup.sqldelight:android-driver:${Versions.sqlDelight}")
+  implementation("app.cash.sqldelight:android-driver:${Versions.sqlDelight}")
 
   // logging
   implementation("org.slf4j:slf4j-api:${Versions.slf4j}")
