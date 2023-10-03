@@ -32,6 +32,7 @@
 		C8D7AFF5BC5754DBBEEB2688 /* ElectrumConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D7A1F8A123C59199C182C2 /* ElectrumConfigurationView.swift */; };
 		DC04C2632A9009890021F2E8 /* MergeChannelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC04C2622A9009890021F2E8 /* MergeChannelsView.swift */; };
 		DC0732EC263CA6C3004CB88D /* PaymentOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0732EB263CA6C3004CB88D /* PaymentOptionsView.swift */; };
+		DC08954C2ACC6C850054A6AB /* WalletCreationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC08954B2ACC6C850054A6AB /* WalletCreationOptions.swift */; };
 		DC08A51827FB39530041603B /* AnimatedChevron.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC08A51727FB39530041603B /* AnimatedChevron.swift */; };
 		DC08A51A27FB6C5F0041603B /* TopTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC08A51927FB6C5F0041603B /* TopTab.swift */; };
 		DC09085825B5E43900A46136 /* String+VersionComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC09085725B5E43900A46136 /* String+VersionComparison.swift */; };
@@ -112,6 +113,8 @@
 		DC46BAF826CACCF700E760A6 /* KotlinAssociatedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC46BAF226CACCF700E760A6 /* KotlinAssociatedObject.swift */; };
 		DC46CB1228D9AAB000C4EAC7 /* LockState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC46CB1128D9AAB000C4EAC7 /* LockState.swift */; };
 		DC46CB1628D9F30500C4EAC7 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC46CB1528D9F30500C4EAC7 /* LoadingView.swift */; };
+		DC4809382AC5DAE9007F556E /* RecoveryPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4809372AC5DAE9007F556E /* RecoveryPhrase.swift */; };
+		DC4809392AC5EC48007F556E /* RecoveryPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4809372AC5DAE9007F556E /* RecoveryPhrase.swift */; };
 		DC4864DA29D4E52C00ACD539 /* BgRefreshDisabledPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4864D929D4E52C00ACD539 /* BgRefreshDisabledPopover.swift */; };
 		DC48D2C42593DE30008D138C /* TextFieldCurrencyStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC48D2C32593DE30008D138C /* TextFieldCurrencyStyler.swift */; };
 		DC49DA8E258BB882005BC4BC /* ScaledButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49DA8D258BB882005BC4BC /* ScaledButtonStyle.swift */; };
@@ -378,6 +381,7 @@
 		C8D7AFF1A7C09789C6CF2D06 /* ConfigurationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationView.swift; sourceTree = "<group>"; };
 		DC04C2622A9009890021F2E8 /* MergeChannelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeChannelsView.swift; sourceTree = "<group>"; };
 		DC0732EB263CA6C3004CB88D /* PaymentOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOptionsView.swift; sourceTree = "<group>"; };
+		DC08954B2ACC6C850054A6AB /* WalletCreationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCreationOptions.swift; sourceTree = "<group>"; };
 		DC08A51727FB39530041603B /* AnimatedChevron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedChevron.swift; sourceTree = "<group>"; };
 		DC08A51927FB6C5F0041603B /* TopTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTab.swift; sourceTree = "<group>"; };
 		DC09085725B5E43900A46136 /* String+VersionComparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+VersionComparison.swift"; sourceTree = "<group>"; };
@@ -454,6 +458,7 @@
 		DC46BAF226CACCF700E760A6 /* KotlinAssociatedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KotlinAssociatedObject.swift; sourceTree = "<group>"; };
 		DC46CB1128D9AAB000C4EAC7 /* LockState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockState.swift; sourceTree = "<group>"; };
 		DC46CB1528D9F30500C4EAC7 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		DC4809372AC5DAE9007F556E /* RecoveryPhrase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryPhrase.swift; sourceTree = "<group>"; };
 		DC4864D929D4E52C00ACD539 /* BgRefreshDisabledPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BgRefreshDisabledPopover.swift; sourceTree = "<group>"; };
 		DC48D2C32593DE30008D138C /* TextFieldCurrencyStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCurrencyStyler.swift; sourceTree = "<group>"; };
 		DC49DA8D258BB882005BC4BC /* ScaledButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledButtonStyle.swift; sourceTree = "<group>"; };
@@ -1079,6 +1084,7 @@
 			isa = PBXGroup;
 			children = (
 				C8D7A2327BC90150A3E1493D /* AboutView.swift */,
+				DC08954B2ACC6C850054A6AB /* WalletCreationOptions.swift */,
 				DC2DC8662906ABE70079E570 /* display configuration */,
 				DCB30E552A0C2FB400E7D7A2 /* payment options */,
 				DCA3B41B2A52226300E6B231 /* channel management */,
@@ -1131,6 +1137,7 @@
 				DCACF6F92566D0BA0009B01E /* GenericPasswordConvertible.swift */,
 				DCACF6F52566D0BA0009B01E /* KeyStoreError.swift */,
 				DCE77A5527C5240500F0FA24 /* TLSConnectionCheck.swift */,
+				DC4809372AC5DAE9007F556E /* RecoveryPhrase.swift */,
 			);
 			path = security;
 			sourceTree = "<group>";
@@ -1718,6 +1725,7 @@
 				DC5EE4C927679C6300A3035C /* RestoreView.swift in Sources */,
 				C8D7A70EFE0F071ACA0AE246 /* QRCodeScanner.swift in Sources */,
 				DC2CE55028A52AD90070A2E1 /* RecentPaymentsConfig.swift in Sources */,
+				DC4809382AC5DAE9007F556E /* RecoveryPhrase.swift in Sources */,
 				DC5A935329846044004F19FD /* FileHandle+Async.swift in Sources */,
 				DC118C0A27B457F70080BBAC /* LnurlFlowErrorNotice.swift in Sources */,
 				53BEF2924096C8E7976D46E3 /* shapes.swift in Sources */,
@@ -1743,6 +1751,7 @@
 				DCB62F472A5DF19D00912A71 /* KotlinPublishers+Lightning.swift in Sources */,
 				DC355E252A45FDD3008E8A8E /* NoticeMonitor.swift in Sources */,
 				F4AED298257A50CD009485C1 /* LogsConfigurationView.swift in Sources */,
+				DC08954C2ACC6C850054A6AB /* WalletCreationOptions.swift in Sources */,
 				DC08A51A27FB6C5F0041603B /* TopTab.swift in Sources */,
 				DC27E4CF2792079600C777CC /* CenterTopLineAlignment.swift in Sources */,
 				DCEAE5B92943D64B00320C46 /* MsatRange.swift in Sources */,
@@ -1781,6 +1790,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC641C752821706600862DCD /* Currency.swift in Sources */,
+				DC4809392AC5EC48007F556E /* RecoveryPhrase.swift in Sources */,
 				DC641C7228208B4D00862DCD /* GroupPrefs.swift in Sources */,
 				DCEB2798282D7B070096B87E /* KotlinExtensions+Other.swift in Sources */,
 				DC641C7328208B7F00862DCD /* UserDefaults+Codable.swift in Sources */,

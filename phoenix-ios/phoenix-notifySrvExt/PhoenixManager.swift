@@ -130,9 +130,9 @@ class PhoenixManager {
 	private func _unlock() {
 		log.trace("_unlock()")
 		
-		let connectWithMnemonics = {(mnemonics: [String]?) in
+		let connectWithRecoveryPhrase = {(recoveryPhrase: RecoveryPhrase?) in
 			DispatchQueue.main.async {
-				self._connect(mnemonics: mnemonics)
+				self._connect(recoveryPhrase: recoveryPhrase)
 			}
 		}
 		
@@ -144,25 +144,35 @@ class PhoenixManager {
 			
 			switch diskResult {
 			case .failure(_):
-				connectWithMnemonics(nil)
+				connectWithRecoveryPhrase(nil)
 				
 			case .success(let securityFile):
 				
 				let keychainResult = SharedSecurity.shared.readKeychainEntry(securityFile)
 				switch keychainResult {
 				case .failure(_):
-					connectWithMnemonics(nil)
-				case .success(let mnemonics):
-					connectWithMnemonics(mnemonics)
-				}
-			}
+					connectWithRecoveryPhrase(nil)
+					
+				case .success(let cleartextData):
+					
+					let decodeResult = SharedSecurity.shared.decodeRecoveryPhrase(cleartextData)
+					switch decodeResult {
+					case .failure(_):
+						connectWithRecoveryPhrase(nil)
+						
+					case .success(let recoveryPhrase):
+						connectWithRecoveryPhrase(recoveryPhrase)
+						
+					} // </switch decodeResult>
+				} // </switch keychainResult>
+			} // </switch diskResult>
 		}
 	}
 	
-	private func _connect(mnemonics: [String]?) {
-		log.trace("_connect(mnemoncis:)")
+	private func _connect(recoveryPhrase: RecoveryPhrase?) {
+		log.trace("_connect(recoveryPhrase:)")
 		
-		guard let mnemonics = mnemonics else {
+		guard let recoveryPhrase, let language = recoveryPhrase.language else {
 			return
 		}
 
@@ -190,7 +200,11 @@ class PhoenixManager {
 			
 		}.store(in: &cancellables)
 		
-		let seed = business.walletManager.mnemonicsToSeed(mnemonics: mnemonics, passphrase: "")
+		let seed = business.walletManager.mnemonicsToSeed(
+			mnemonics: recoveryPhrase.mnemonicsArray,
+			wordList: language.wordlist(),
+			passphrase: ""
+		)
 		business.walletManager.loadWallet(seed: seed)
 		
 		_refreshCurrencyExchangeRate()

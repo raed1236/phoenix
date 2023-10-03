@@ -65,6 +65,10 @@ class BusinessManager {
 	///
 	public let canMergeChannelsForSplicingPublisher = CurrentValueSubject<Bool, Never>(false)
 	
+	/// For creating a new wallet
+	/// 
+	public let mnemonicLanguagePublisher = CurrentValueSubject<MnemonicLanguage, Never>(MnemonicLanguage.english)
+	
 	private var walletInfo: WalletManager.WalletInfo? = nil
 	private var pushToken: String? = nil
 	private var fcmToken: String? = nil
@@ -276,7 +280,7 @@ class BusinessManager {
 	///
 	@discardableResult
 	func loadWallet(
-		mnemonics: [String],
+		recoveryPhrase: RecoveryPhrase,
 		seed knownSeed: KotlinByteArray? = nil,
 		walletRestoreType: WalletRestoreType? = nil
 	) -> Bool {
@@ -292,7 +296,15 @@ class BusinessManager {
 			return false
 		}
 		
-		let seed = knownSeed ?? business.walletManager.mnemonicsToSeed(mnemonics: mnemonics, passphrase: "")
+		guard let language = recoveryPhrase.language else {
+			return false
+		}
+		
+		let seed = knownSeed ?? business.walletManager.mnemonicsToSeed(
+			mnemonics  : recoveryPhrase.mnemonicsArray,
+			wordList   : language.wordlist(),
+			passphrase : ""
+		)
 		let _walletInfo = business.walletManager.loadWallet(seed: seed)
 		
 		self.walletInfo = _walletInfo
@@ -333,7 +345,7 @@ class BusinessManager {
 
 		self.syncManager = SyncManager(
 			chain: business.chain,
-			mnemonics: mnemonics,
+			recoveryPhrase: recoveryPhrase,
 			cloudKey: cloudKey,
 			encryptedNodeId: encryptedNodeId
 		)
