@@ -58,7 +58,7 @@ class PhoenixBusiness(
 
     val loggerFactory = LoggerFactory(
         defaultLogFrontend.withShortPackageKeepLast(1),
-        logMemory.withShortPackageKeepLast(1)
+    //  logMemory.withShortPackageKeepLast(1)
     )
 
     private val logger = loggerFactory.newLogger(this::class)
