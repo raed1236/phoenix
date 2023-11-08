@@ -26,10 +26,10 @@ extension Lightning_kmpElectrumClient {
 			/// Transforming from Kotlin:
 			/// `notifications: Flow<ElectrumSubscriptionResponse>`
 			///
-			KotlinPassthroughSubject<Lightning_kmpElectrumSubscriptionResponse>(
-				self.notifications
+			KotlinPassthroughSubject<AnyObject>(
+				self.notifications._bridgeToObjectiveC()
 			)
-			.compactMap { $0 }
+			.compactMap { $0 as? Lightning_kmpElectrumSubscriptionResponse }
 			.eraseToAnyPublisher()
 		}
 	}
@@ -49,10 +49,11 @@ extension Lightning_kmpElectrumWatcher {
 			/// Transforming from Kotlin:
 			/// `openUpToDateFlow(): Flow<Long>`
 			///
-			KotlinPassthroughSubject<KotlinLong>(
-				self.openUpToDateFlow()
+			KotlinPassthroughSubject<AnyObject>(
+				self.openUpToDateFlow()._bridgeToObjectiveC()
 			)
-			.compactMap { $0?.int64Value }
+			.compactMap { $0 as? KotlinLong }
+			.map { $0.int64Value }
 			.eraseToAnyPublisher()
 		}
 	}
@@ -72,10 +73,10 @@ extension Lightning_kmpNodeParams {
 			/// Transforming from Kotlin:
 			/// `nodeEvents: SharedFlow<NodeEvents>`
 			///
-			KotlinPassthroughSubject<Lightning_kmpNodeEvents>(
-				self.nodeEvents
+			KotlinPassthroughSubject<AnyObject>(
+				self.nodeEvents._bridgeToObjectiveC()
 			)
-			.compactMap { $0 }
+			.compactMap { $0 as? Lightning_kmpNodeEvents }
 			.eraseToAnyPublisher()
 		}
 	}

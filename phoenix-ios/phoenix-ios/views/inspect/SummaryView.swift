@@ -732,7 +732,7 @@ struct SummaryView: View {
 	func onAppear() {
 		log.trace("onAppear()")
 		
-		let business = Biz.business
+		let paymentsManager = Biz.business.paymentsManager
 		
 		if !didAppear {
 			didAppear = true
@@ -745,20 +745,20 @@ struct SummaryView: View {
 				// or the payment information is possibly stale, and needs to be refreshed.
 				
 				if let row = paymentInfo.toOrderRow() {
-
-					business.paymentsManager.fetcher.getPayment(row: row, options: fetchOptions) { (result, _) in
-
-						if let result = result {
-							paymentInfo = result
+					
+					Task { @MainActor in
+						let result = try await paymentsManager.fetcher.getPayment(row: row, options: fetchOptions)
+						if let result {
+							self.paymentInfo = result
 						}
 					}
 
 				} else {
 				
-					business.paymentsManager.getPayment(id: paymentInfo.id(), options: fetchOptions) { (result, _) in
-						
-						if let result = result {
-							paymentInfo = result
+					Task { @MainActor in
+						let result = try await paymentsManager.getPayment(id: paymentInfo.id(), options: fetchOptions)
+						if let result {
+							self.paymentInfo = result
 						}
 					}
 				}
@@ -770,8 +770,8 @@ struct SummaryView: View {
 			// The payment metadata may have changed (e.g. description/notes modified).
 			// So we need to refresh the payment info.
 			
-			business.paymentsManager.getPayment(id: paymentInfo.id(), options: fetchOptions) { (result, _) in
-				
+			Task { @MainActor in
+				let result = try await paymentsManager.getPayment(id: paymentInfo.id(), options: fetchOptions)
 				if let result = result {
 					paymentInfo = result
 				}
@@ -831,14 +831,14 @@ struct SummaryView: View {
 	func deletePayment() {
 		log.trace("deletePayment()")
 		
-		Biz.business.databaseManager.paymentsDb { paymentsDb, _ in
-			
-			paymentsDb?.deletePayment(paymentId: paymentInfo.id(), completionHandler: { error in
-				
-				if let error = error {
-					log.error("Error deleting payment: \(String(describing: error))")
-				}
-			})
+		let databaseManager = Biz.business.databaseManager
+		Task { @MainActor in
+			do {
+				let paymentsDb = try await databaseManager.paymentsDb()
+				try await paymentsDb.deletePayment(paymentId: paymentInfo.id())
+			} catch {
+				log.error("Error deleting payment: \(error)")
+			}
 		}
 		
 		switch location {

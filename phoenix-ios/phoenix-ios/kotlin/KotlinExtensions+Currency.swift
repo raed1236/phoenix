@@ -421,7 +421,7 @@ extension FiatCurrency {
 		
 		let (selfCurrencyCode, _) = self.splitShortName
 		
-		return self.getSetAssociatedObject(storageKey: &_Key.matchingLocales) {
+		return self._bridgeToObjectiveC().getSetAssociatedObject(storageKey: &_Key.matchingLocales) {
 			
 			var matchingLocales = [Locale]()
 			for identifier in Locale.availableIdentifiers {
@@ -444,7 +444,7 @@ extension FiatCurrency {
 			return true
 		}
 		
-		return self.getSetAssociatedObject(storageKey: &_Key.usesCents) {
+		return self._bridgeToObjectiveC().getSetAssociatedObject(storageKey: &_Key.usesCents) {
 			
 			let formatter = NumberFormatter()
 			formatter.numberStyle = .currency

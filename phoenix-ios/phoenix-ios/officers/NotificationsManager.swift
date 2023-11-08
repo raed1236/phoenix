@@ -291,7 +291,7 @@ class NotificationsManager {
 			)
 			
 			let request = UNNotificationRequest(
-				identifier: payment.id(),
+				identifier: payment.id_(),
 				content: content,
 				trigger: nil
 			)

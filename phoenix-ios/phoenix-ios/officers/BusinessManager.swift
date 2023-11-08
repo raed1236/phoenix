@@ -477,9 +477,11 @@ class BusinessManager {
 		
 		let token = self.fcmToken
 		log.debug("registering fcm token: \(token?.description ?? "<nil>")")
-		business.registerFcmToken(token: token) { error in
-			if let e = error {
-				log.error("failed to register fcm token: \(e.localizedDescription)")
+		Task { @MainActor in
+			do {
+				try await business.registerFcmToken(token: token)
+			} catch {
+				log.error("failed to register fcm token: \(error.localizedDescription)")
 			}
 		}
 		
